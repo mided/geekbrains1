@@ -82,13 +82,12 @@ namespace BusinessLogic
 
         public Deed AddExecutioner(AddDeedExecutionerDTO dto)
         {
-            var deed = _repository.GetById<Deed>(dto.DeedId);
-            deed.Executions.Add(new Execution
-                { DeedId = deed.Id, UserId = dto.Execution.ExecutionerId, PlannedDate = dto.Execution.PlannedDate });
+            var execution = new Execution
+                {DeedId = dto.DeedId, UserId = dto.Execution.ExecutionerId, PlannedDate = dto.Execution.PlannedDate};
 
-            _repository.SaveEntity(deed);
+            _repository.AddEntity(execution);
 
-            return _repository.GetById<Deed>(deed.Id);
+            return _repository.GetById<Deed>(dto.DeedId);
         }
 
         private Deed ChangeDeedExecution(int deedId, int userId, bool executed)

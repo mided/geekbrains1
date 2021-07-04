@@ -2,7 +2,7 @@
 
 namespace EfDataAccess
 {
-    public class User : IIdDbRecord
+    public class User : IEntityWithId
     {
         public int Id { get; set; }
 

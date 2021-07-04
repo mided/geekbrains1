@@ -1,8 +1,9 @@
 ﻿using System;
+using Domain.Interfaces;
 
 namespace Domain.Entities
 {
-    public class Execution
+    public class Execution : IEntityWithId
     {
         public int Id { get; set; }
 

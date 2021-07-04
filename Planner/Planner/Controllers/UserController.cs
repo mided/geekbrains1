@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.DTO;
 using Domain.Interfaces;
 using Planner.Mapper;
-using Planner.OutDtos;
+using Planner.OutDTO;
 
 namespace Planner.Controllers
 {
@@ -12,17 +12,14 @@ namespace Planner.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
-
         private readonly IPlannerLogicService _logicService;
 
         private readonly AutoMapper.Mapper _mapper;
 
-        public UserController(ILogger<UserController> logger, IPlannerLogicService logicService)
+        public UserController(IPlannerLogicService logicService)
         {
-            _logger = logger;
             _logicService = logicService;
-            _mapper = MapperConfig.Mapper;
+            _mapper = MapperFactory.Mapper;
         }
 
         [HttpGet]
@@ -37,6 +34,14 @@ namespace Planner.Controllers
             var users = _logicService.GetUsers();
 
             return users.Select(u => _mapper.Map<UserOutDTO>(u)).ToList();
+        }
+
+        [HttpPost]
+        [Route("register")]
+        public ActionResult<UserOutDTO> Register([FromBody] RegisterUserDTO dto)
+        {
+            var user = _logicService.RegisterUser(dto);
+            return _mapper.Map<UserOutDTO>(user);
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Domain.Interfaces;
 
 namespace Domain.Entities
 {
-    public class Deed
+    public class Deed : IEntityWithId
     {
         public int Id { get; set; }
 

@@ -12,7 +12,7 @@ namespace Domain.Interfaces
 
         public T AddEntity<T>(T entity) where T : class;
 
-        public void DeleteEntity<T>(IIdDbRecord entity) where T : class;
+        public void DeleteEntity<T>(IEntityWithId entity) where T : class;
 
         public T GetById<T>(int id) where T : class;
 

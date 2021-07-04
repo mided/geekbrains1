@@ -1,6 +1,6 @@
 ﻿namespace Domain.Interfaces
 {
-    public interface IIdDbRecord
+    public interface IEntityWithId
     {
         public int Id { get; set; }
     }

@@ -15,7 +15,7 @@ namespace EfDataAccess
         public Repository()
         {
             _context = new PlannerContext();
-            _mapper = MapperConfig.Mapper;
+            _mapper = MapperFactory.Mapper;
         }
 
         #region Generic
@@ -24,7 +24,7 @@ namespace EfDataAccess
         {
             var dbType = GetDbType(typeof(T));
 
-            var record = _context.Set(dbType).OfType<IIdDbRecord>().FirstOrDefault(r => r.Id == id);
+            var record = _context.Set(dbType).OfType<IEntityWithId>().FirstOrDefault(r => r.Id == id);
 
             return _mapper.Map<T>(record);
         }
@@ -38,7 +38,10 @@ namespace EfDataAccess
 
         public T SaveEntity<T>(T entity) where T : class
         {
-            var dbRecord = GetById<T>(((IIdDbRecord)entity).Id);
+            var dbType = GetDbType(typeof(T));
+            var id = ((IEntityWithId) entity).Id;
+
+            var dbRecord = _context.Set(dbType).OfType<IEntityWithId>().FirstOrDefault(r => r.Id == id);
 
             _mapper.Map(entity, dbRecord);
 
@@ -60,7 +63,7 @@ namespace EfDataAccess
             return _mapper.Map<T>(dbRecord);
         }
 
-        public void DeleteEntity<T>(IIdDbRecord entity) where T : class
+        public void DeleteEntity<T>(IEntityWithId entity) where T : class
         {
             var record = GetById<T>(entity.Id);
 

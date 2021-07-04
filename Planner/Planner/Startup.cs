@@ -5,11 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using BusinessLogic;
-using Domain.Exceptions;
 using EfDataAccess;
 using Domain.Interfaces;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
 
 namespace Planner
 {
@@ -28,7 +25,10 @@ namespace Planner
             services.AddScoped<IDataRepository, Repository>();
             services.AddScoped<IPlannerLogicService, PlannerLogicService>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Planner", Version = "v1" });

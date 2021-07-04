@@ -1,4 +1,4 @@
-﻿namespace Planner.OutDtos
+﻿namespace Planner.OutDTO
 {
     public class UserOutDTO
     {

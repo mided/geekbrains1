@@ -22,6 +22,8 @@ namespace Planner
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddScoped<IDataRepository, Repository>();
             services.AddScoped<IPlannerLogicService, PlannerLogicService>();
 
@@ -44,6 +46,8 @@ namespace Planner
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Planner v1"));
             }
+
+            app.UseCors(b => b.AllowAnyOrigin().AllowAnyHeader());
 
             app.UseHttpsRedirection();
 

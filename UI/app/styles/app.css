@@ -1,0 +1,64 @@
+.deed-component {
+	border: 1px solid black;
+	width: 200px;
+	padding: 3px;
+	display: flex;
+	justify-content: space-between;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+
+.delete-deed {
+	width: 25px;
+	height: 25px;
+}
+
+.execution-component {
+	display: flex;
+}
+.execution-component-element {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.execution-component input {
+	width: 20px;
+}
+
+.execution-component .executioner {
+	width: 130px;
+}
+
+.execution-component .execution-date {
+	width: 70px;
+}
+
+.day-of-week-header {
+	border: 1px solid black;
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.week-component {
+	display: flex;
+	flex-direction: row;
+}
+
+.week-day {
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.add-deed-button {
+	width: 40px;
+	height: 20px;
+	margin-top: 10px;	
+}
+
+.day-component {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}

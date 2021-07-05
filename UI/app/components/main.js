@@ -3,15 +3,16 @@ import Ember from 'ember';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
-	logicService: service('basic-logic-service'),
+  logicService: service('basic-logic-service'),
+  weekData: null,
 
-    async didInsertElement() {        
-		let communicationService = this.get('logicService');
+  async didInsertElement() {
+    this._super(...arguments);
+    let communicationService = this.logicService;
 
-		await communicationService.login('Denis');
+    await communicationService.login('Denis');
 
-		//await communicationService.get('user', {name: 'Denis'});
-
-		//await communicationService.post('user/register', {name: 'Мэрилин Мэнсон'});
-    },
+	let weekDataResponse = await this.logicService.getWeekData();
+	Ember.set(this, 'weekData', weekDataResponse);	
+  },
 });

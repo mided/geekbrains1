@@ -1,0 +1,10 @@
+<div class = 'week-component'>
+{{#each weekDays as |weekDay|}}
+	<div class="week-day">
+		{{#day-component date=weekDay.day weekData=weekData}}
+        {{/day-component}}
+	</div>    
+{{/each}}
+</div>
+
+{{yield}}

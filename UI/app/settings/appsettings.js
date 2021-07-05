@@ -1,6 +1,4 @@
-export default (
-    {
-        api: 'https://localhost:44305',
-		consoleLog: true
-    }
-)
+export default {
+  api: 'https://localhost:44305',
+  consoleLog: true,
+};

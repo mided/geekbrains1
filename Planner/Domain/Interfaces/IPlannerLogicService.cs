@@ -22,5 +22,9 @@ namespace Domain.Interfaces
         public Deed CreateDeed(CreateDeedDTO dto);
 
         public Deed AddExecutioner(AddDeedExecutionerDTO dto);
+
+        public void DeleteDeed(int deedId);
+
+        public Deed DeleteExecutioner(int deedId, int userId);
     }
 }

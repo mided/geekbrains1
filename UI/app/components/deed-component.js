@@ -5,19 +5,20 @@ import Ember from 'ember';
 export default Component.extend({
   logicService: service('basic-logic-service'),
   date: new Date(),
-  deeds: [],
-  weekData: [],
+  deed: null,
 
   async didReceiveAttrs() {
     this._super(...arguments);
     let logicService = this.logicService;
-    Ember.set(this, 'deeds', logicService.getDeedsForDate(this.date));
   },
 
   actions: {
-	addDeed: function() {
-		let logicService = this.logicService;
-		logicService.mainComponent.subwindowShow({ date: this.date });
-	 },
+	addExecution: function() {
+		this.logicService.mainComponent.subwindowShow({ deed: this.deed, date: this.date });
+	},
+
+	deleteDeed: function() {
+		this.logicService.deleteDeed(this.deed.id);
+	},
   },
 });

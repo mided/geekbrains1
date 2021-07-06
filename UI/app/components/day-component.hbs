@@ -1,18 +1,17 @@
 <div class = 'day-component'>
 	<div class = 'day-of-week-header'>
 		<div class = 'day-of-week'>
-			{{dayOfWeek date}}
+			{{dayOfWeek this.date}}
 		</div>
 		<div class = 'date'>
-			{{formatDate date}}
+			{{formatDate this.date}}
 		</div>
 	</div>
-	<button class='add-deed-button'>+</button>
-	{{#each deeds as |deed|}}
+	<button class='add-deed-button' type="button" {{action 'addDeed'}}>+</button>
+	{{#each this.deeds as |deed|}}
 	<div class="deed-in-day">
-		{{#deed-component date=weekDay.day}}
-        {{/deed-component}}
+		<DeedComponent @deed={{deed}} />
 	</div>    
-{{/each}}
+	{{/each}}
 </div>
 {{yield}}

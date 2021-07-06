@@ -1,0 +1,25 @@
+<div class = 'add-deed-component'>
+	<div class = 'add-deed-label'>
+		{{#if this.deed}}
+		Add executioner
+		{{else}}
+		Add deed
+		{{/if}}
+	</div>
+	<Textarea class='add-deed-description-input' @type='text' @value={{this.description}} readonly={{this.deed}}/>
+	<div class = 'add-deed-label'>Executioner</div>
+	<select class='add-dedd-executioner' onchange={{action 'selectUser' value="target.value"}}>
+		<option value={{null}}></option>
+		{{#each this.users as |user|}}
+		<option value={{user.id}}>{{user.name}}</option>
+		{{/each}}
+	</select>
+	<div class='add-deed-label'>Planned date</div>
+	<div class='add-deed-pickaday'>
+	  {{pikaday-input value=this.date onSelection=(action (mut this.date))}}
+	</div>
+	<div class='add-deed-footer'>
+		<button class='save-deed' disabled={{this.validationErrors}} {{action 'save'}}>Save</button>		
+	</div>
+</div>	
+{{yield}}

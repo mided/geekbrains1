@@ -6,4 +6,6 @@ export default {
   completeDeed: 'deed/complete',
   uncompleteDeed: 'deed/uncomplete',
   addexecutioner: 'deed/addexecutioner',
+  deleteDeed: 'deed/delete',
+  deleteExecutioner: 'deed/delete-executioner',
 };

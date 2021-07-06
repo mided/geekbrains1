@@ -60,10 +60,26 @@ namespace Planner.Controllers
 
         [HttpPost]
         [Route("addexecutioner")]
-        public ActionResult<DeedOutDTO> Uncomplete([FromBody] AddDeedExecutionerDTO dto)
+        public ActionResult<DeedOutDTO> AddExecutioner([FromBody] AddDeedExecutionerDTO dto)
         {
             var deed = _logicService.AddExecutioner(dto);
 
+            return _mapper.Map<DeedOutDTO>(deed);
+        }
+
+        [HttpPost]
+        [Route("delete")]
+        public ActionResult Delete(int deedId)
+        {
+            _logicService.DeleteDeed(deedId);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("delete-executioner")]
+        public ActionResult<DeedOutDTO> DeleteExecutioner(int deedId, int userId)
+        {
+            var deed = _logicService.DeleteExecutioner(deedId, userId);
             return _mapper.Map<DeedOutDTO>(deed);
         }
     }

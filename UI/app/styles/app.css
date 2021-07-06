@@ -1,20 +1,29 @@
 .deed-component {
 	border: 1px solid black;
-	width: 200px;
-	padding: 3px;
-	display: flex;
-	justify-content: space-between;
+	width: 220px;
+	padding: 3px;	
 	border-radius: 5px;
 	margin-top: 10px;
 }
 
+.deed-component-header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.deed-component-body {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
 .delete-deed {
 	width: 25px;
-	height: 25px;
+	height: 20px;
 }
 
 .execution-component {
 	display: flex;
+	flex-direction: row;
 }
 .execution-component-element {
 	margin-left: 2px;
@@ -30,12 +39,12 @@
 }
 
 .execution-component .execution-date {
-	width: 70px;
+	width: 110px;
 }
 
 .day-of-week-header {
 	border: 1px solid black;
-	width: 200px;
+	width: 230px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -61,4 +70,82 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+}
+
+.deed-component-footer {
+	margin-top: 5px;
+	align-items: flex-end;
+}
+
+.delete-execution {
+	width: 18px;
+	height: 18px;
+	padding: 0px;
+}
+
+.screen-locker {
+	width: 100%;
+	height: 100%;
+	background-color:gray;
+	opacity: 50%;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 50;
+}
+.subwindow {
+	z-index: 100;
+	top:50%;  
+	left:50%;  
+	margin:-125px 0 0 -100px;  
+	width:200px;  
+	height:250px;  
+	display: flex;
+	position: absolute;
+	background-color: white;
+	border: 2px solid black;
+	flex-direction: column;
+	padding: 5px;
+}
+.subwindow-header {
+	display: flex;
+	justify-content: flex-end;
+}
+.subwindow-close {
+	width: 20px;
+	height: 20px;
+	padding: 0px;
+}
+.add-deed-description-input {
+	height: 50px;
+	width: 194px;
+	resize: none;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+.add-deed-footer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 10px;	
+}
+
+.save-deed {
+	height: 30px;
+	width: 60px;
+}
+
+.add-dedd-executioner {
+	width: 200px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.add-deed-pickaday input {
+	width: 192px;
+}
+
+.current-user {
+	font-size: 20px;
+	margin-bottom: 10px;
 }

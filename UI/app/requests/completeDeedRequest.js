@@ -1,7 +1,5 @@
 import Ember from 'ember';
 export default Ember.Object.extend({
-  id: 0,
-  day: '',
-  description: '',
-  executions: [],
+  userId: 0,
+  deedId: 0,
 });

@@ -1,6 +1,7 @@
 <div class = 'execution-component'>
-	<Input class='execution-component-element' @type='checkbox'/>
-	<div class='executioner execution-component-element'>Имя пользователя</div>
-	<div class='execution-date execution-component-element'>01.01.2021</div>
+	<Input class='execution-component-element' @type='checkbox' @checked={{this.executed}}/>
+	<div class='executioner execution-component-element'>{{this.execution.user.name}}</div>
+	<div class='execution-date execution-component-element'>{{formatDate this.execution.plannedDate}}</div>
+	<button class='delete-execution' type="button" {{action 'deleteExecution'}}>x</button>
 </div>
 {{yield}}

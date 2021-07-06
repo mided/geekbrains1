@@ -90,6 +90,33 @@ namespace BusinessLogic
             return _repository.GetById<Deed>(dto.DeedId);
         }
 
+        public void DeleteDeed(int deedId)
+        {
+            var deed = _repository.GetById<Deed>(deedId);
+            foreach (var execution in deed.Executions)
+            {
+                _repository.DeleteEntity<Execution>(execution);
+            }
+            
+            _repository.DeleteEntity<Deed>(deed);
+        }
+
+        public Deed DeleteExecutioner(int deedId, int userId)
+        {
+            var deed = _repository.GetById<Deed>(deedId);
+
+            var execution = deed.Executions.FirstOrDefault(e => e.UserId == userId);
+
+            if (execution == null)
+            {
+                throw new NotFoundException();
+            }
+
+            _repository.DeleteEntity<Execution>(execution);
+
+            return deed;
+        }
+
         private Deed ChangeDeedExecution(int deedId, int userId, bool executed)
         {
             var deed = _repository.GetById<Deed>(deedId);

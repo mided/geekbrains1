@@ -1,8 +1,8 @@
 <div class = 'week-component'>
-{{#each weekDays as |weekDay|}}
+{{#each this.weekDays as |weekDay|}}
 	<div class="week-day">
-		{{#day-component date=weekDay.day weekData=weekData}}
-        {{/day-component}}
+		<DayComponent @date={{weekDay.day}} @weekData={{this.weekData}}>
+        </DayComponent>
 	</div>    
 {{/each}}
 </div>

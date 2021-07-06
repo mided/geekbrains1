@@ -65,7 +65,9 @@ namespace EfDataAccess
 
         public void DeleteEntity<T>(IEntityWithId entity) where T : class
         {
-            var record = GetById<T>(entity.Id);
+            var dbType = GetDbType(typeof(T));
+
+            var record = _context.Set(dbType).OfType<IEntityWithId>().FirstOrDefault(r => r.Id == entity.Id);
 
             _context.Remove(record);
 

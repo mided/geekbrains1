@@ -1,7 +1,17 @@
 <div class = 'deed-component'>
-	<div class = 'description'>Это описание задачи. Оно может быть длинным</div>
-	<button class = 'delete-deed' type="button">X</button>
-
+	<div class = 'deed-component-header'>
+		<div class = 'description'>{{this.deed.description}}</div>
+		<button class = 'delete-deed' type="button" {{action 'deleteDeed'}}>X</button>
+	</div>
+	<div class = 'deed-component-body'>
+	{{#each this.deed.executions as |execution|}}
+		<ExecutionComponent @execution={{execution}} @deedId={{this.deed.id}}>
+        </ExecutionComponent>
+	{{/each}}
+	</div>
+	<div class = 'deed-component-footer'>		
+		<button class = 'add-execution' type="button" {{action 'addExecution'}}>+</button>
+	</div>
 </div>
 
 {{yield}}

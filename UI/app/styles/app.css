@@ -149,3 +149,7 @@
 	font-size: 20px;
 	margin-bottom: 10px;
 }
+
+textarea:disabled {
+	background-color:lightgrey;	
+}

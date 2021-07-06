@@ -9,6 +9,7 @@ export default Component.extend({
   users: [],
   guid: null,
   selectedUser: null,
+  defaultUserName : '',
   validationErrors: true,
   description: null,
   date: null,
@@ -23,12 +24,17 @@ export default Component.extend({
 	this.logicService.subscribeOnUsers(this.guid, () => {
 		Ember.set(component, 'users', component.logicService.users);
 	});
-	
+
 	Ember.set(this, 'deed', this.logicService.mainComponent.subwindowData?.deed);
 	Ember.set(this, 'date', this.logicService.mainComponent.subwindowData?.date);
 
 	Ember.set(this, 'description', this.deed?.description);
-	
+
+	if (this.deed == null) {		
+		Ember.set(this, 'selectedUser', this.logicService.currentUser.id);
+		Ember.set(this, 'defaultUserName', this.logicService.currentUser.name);
+	}	
+
 	this.validate();
   },
 

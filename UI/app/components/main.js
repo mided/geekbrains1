@@ -13,7 +13,7 @@ export default Component.extend({
     this._super(...arguments);
     let logicService = this.logicService;
 
-    let user = await logicService.login('Denis');
+    let user = await logicService.login('Карлсон');
 	Ember.set(this, 'currentUser', user.name);
 
 	await this.logicService.getUsers();

@@ -84,7 +84,7 @@ export default Service.extend({
   getDeedsForDate(date) {
     let formattedDate = date.toISOString().split('T')[0];
     let res = this.weekData.filter((deed) =>
-      deed.executions.some((e) => e.plannedDate.split('T')[0] == formattedDate)
+      deed.executions.some((e) => e.plannedDate.split('T')[0] == formattedDate && this.currentUser.id == e.user.id)
     );
     return res;
   },

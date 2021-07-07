@@ -13,7 +13,7 @@ export default Component.extend({
     Ember.set(this, 'executed', this.execution.executionDate != null);
   },
 
-  executionChanged: Ember.observer('executed', function () {    
+  executionChanged: Ember.observer('executed', function () {
     this.logicService.changeDeedExecution(
       this.deedId,
       this.execution.user.id,
@@ -21,11 +21,8 @@ export default Component.extend({
     );
   }),
   actions: {
-	deleteExecution: function() {
-		this.logicService.deleteExecutioner(
-			this.deedId,
-			this.execution.user.id
-		  );
-	},
-  }
+    deleteExecution: function () {
+      this.logicService.deleteExecutioner(this.deedId, this.execution.user.id);
+    },
+  },
 });

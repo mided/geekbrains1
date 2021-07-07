@@ -151,5 +151,44 @@
 }
 
 textarea:disabled {
-	background-color:lightgrey;	
+	background-color:lightgrey;
+}
+
+.to-register-button
+{
+	width: 100px;
+	height: 30px;
+	margin-top: 20px;
+	margin-left: 90px;
+}
+
+.to-login-button {
+	width: 130px;
+	height: 30px;
+	margin-top: 20px;
+	margin-left: 130px;
+}
+
+.login-component {
+	z-index: 100;
+	top:50%;  
+	left:50%;  
+	margin:-125px 0 0 -100px;
+	display: flex;
+	position: absolute;	
+	flex-direction: column;
+	padding: 5px;
+}
+
+.login-form,
+.register-form {
+	display: flex;
+}
+.login-form div,
+.register-form div {
+	margin-right: 5px;
+}
+.login-form button,
+.register-form button {
+	margin-left: 5px;
 }

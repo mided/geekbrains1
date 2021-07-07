@@ -13,12 +13,15 @@ export default Component.extend({
   },
 
   actions: {
-	addExecution: function() {
-		this.logicService.mainComponent.subwindowShow({ deed: this.deed, date: this.date });
-	},
+    addExecution: function () {
+      this.logicService.mainComponent.subwindowShow({
+        deed: this.deed,
+        date: this.date,
+      });
+    },
 
-	deleteDeed: function() {
-		this.logicService.deleteDeed(this.deed.id);
-	},
+    deleteDeed: function () {
+      this.logicService.deleteDeed(this.deed.id);
+    },
   },
 });

@@ -1,9 +1,13 @@
-<div class='current-user'>{{this.currentUser}}</div>
-<WeekComponent @weekData={{this.weekData}} />
-{{#if this.showSubwindow}}
-<div class='screen-locker'></div>
-<Subwindow>
-	<ChangeDeedComponent/>
-</Subwindow>
+{{#if this.currentUser}}
+	<div class='current-user'>{{this.currentUser}}</div>
+	<WeekComponent @weekData={{this.weekData}} />
+	{{#if this.showSubwindow}}
+	<div class='screen-locker'></div>
+	<Subwindow>
+		<ChangeDeedComponent/>
+	</Subwindow>
+	{{/if}}
+{{else}}
+	<LoginComponent @initAfterLogin = {{this.initAfterLogin}}/>
 {{/if}}
 {{yield}}

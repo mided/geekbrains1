@@ -43,20 +43,18 @@ export default Service.extend({
       }
     );
 
-	try {
-		let data = await response.json();
+    try {
+      let data = await response.json();
 
-		if (AppSettings.consoleLog) {
-		  console.log(data, 'response ' + route);
-		}
-		return data;
-	}
-	catch (ex) {
-		if (ex.message != 'Unexpected end of JSON input')
-		{
-			throw ex;
-		}
-	}
+      if (AppSettings.consoleLog) {
+        console.log(data, 'response ' + route);
+      }
+      return data;
+    } catch (ex) {
+      if (ex.message != 'Unexpected end of JSON input') {
+        throw ex;
+      }
+    }
   },
 
   getQueryFromParams(params) {

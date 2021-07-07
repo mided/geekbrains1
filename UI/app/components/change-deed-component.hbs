@@ -11,7 +11,7 @@
 	<select class='add-dedd-executioner' onchange={{action 'selectUser' value="target.value"}}>
 		<option value={{null}}>{{this.defaultUserName}}</option>
 		{{#each this.users as |user|}}
-		<option value={{user.id}}/>
+		<option value={{user.id}}>{{user.name}}</option>>
 		{{/each}}
 	</select>
 	<div class='add-deed-label'>Planned date</div>
@@ -19,7 +19,7 @@
 	  {{pikaday-input value=this.date onSelection=(action (mut this.date))}}
 	</div>
 	<div class='add-deed-footer'>
-		<button class='save-deed' disabled={{this.validationErrors}} {{action 'save'}}>Save</button>		
+		<button class='save-deed' disabled={{this.validationErrors}} type="button" {{action 'save'}}>Save</button>		
 	</div>
 </div>	
 {{yield}}

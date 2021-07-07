@@ -1,0 +1,19 @@
+<div class = 'login-component'>
+	{{#if this.register}}
+	<div class='register-form'>
+		<div>Create login:</div>
+		<Input @type='text' @value={{this.loginName}}/>
+		<button {{action 'register'}}>Register and login</button>		
+	</div>
+	<button class='to-login-button' {{action 'toLogin'}}>Return to Login</button>
+	{{else}}
+	<div class='login-form'>
+		<div>Login:</div>
+		<Input @type='text' @value={{this.loginName}}/>
+		<button {{action 'login'}}>Login</button>		
+	</div>
+	<button class='to-register-button' {{action 'toRegister'}}>Register</button>
+	{{/if}}	
+</div>
+
+{{yield}}

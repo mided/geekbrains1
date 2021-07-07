@@ -12,15 +12,14 @@ export default Component.extend({
   async didInsertElement() {
     this._super(...arguments);
     let logicService = this.logicService;
+    logicService.mainComponent = this;
+  },
 
-    let user = await logicService.login('Карлсон');
-	Ember.set(this, 'currentUser', user.name);
-
+  async initAfterLogin() {
+	let component = this.logicService.mainComponent;
 	await this.logicService.getUsers();
-
-	await this.reload();
-
-	logicService.mainComponent = this;
+	Ember.set(component, 'currentUser', this.logicService.currentUser.name);	
+	await component.reload();
   },
 
   async reload() {
@@ -29,13 +28,12 @@ export default Component.extend({
   },
 
   subwindowShow(data) {
-	  Ember.set(this, 'showSubwindow', true);
-	  Ember.set(this, 'subwindowData', data);
-  },
-  
-  subwindowHide() {
-	Ember.set(this, 'showSubwindow', false);
-	Ember.set(this, 'subwindowData', null);
+    Ember.set(this, 'showSubwindow', true);
+    Ember.set(this, 'subwindowData', data);
   },
 
+  subwindowHide() {
+    Ember.set(this, 'showSubwindow', false);
+    Ember.set(this, 'subwindowData', null);
+  },
 });

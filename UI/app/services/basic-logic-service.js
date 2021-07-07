@@ -7,11 +7,11 @@ import UncompleteDeedRequest from '../requests/uncompleteDeedRequest';
 import AddDeedRequest from '../requests/addDeedRequest';
 import AddExecutionerRequest from '../requests/addExecutionerRequest';
 import DeleteDeedRequest from '../requests/deleteDeedRequest';
-import DeleteExecutionerRequest from '../requests/deleteExecutionerRequest';
+import RegisterUserRequest from '../requests/registerUserRequest';
 import { inject as service } from '@ember/service';
 import { getWeekStart, getWeekEnd } from '../helpers/dateTimeFunctions';
 import Ember from 'ember';
-import deleteExecutionerRequest from '../requests/deleteExecutionerRequest';
+import DeleteExecutionerRequest from '../requests/deleteExecutionerRequest';
 
 export default Service.extend({
   communicationService: service('communication-service'),
@@ -26,23 +26,22 @@ export default Service.extend({
   },
 
   usersChanged: Ember.observer('users', function () {
-	  this.userSubsctiptions.forEach(s => s.callback());
+    this.userSubsctiptions.forEach((s) => s.callback());
   }),
 
   subscribeOnUsers(id, callback) {
-	  let subscription = {id, callback};
-	  subscription.id = id;
-	  subscription.callback = callback;
-	  this.userSubsctiptions.push(subscription);
+    let subscription = { id, callback };
+    subscription.id = id;
+    subscription.callback = callback;
+    this.userSubsctiptions.push(subscription);
   },
 
   unsubscribeFromUsers(id) {
-	let subscription = this.userSubsctiptions.find(s => s.id == id);	
-	if (subscription != null)
-	{
-		this.userSubsctiptions.remove(subscription);
-	}	
-},
+    let subscription = this.userSubsctiptions.find((s) => s.id == id);
+    if (subscription != null) {
+      this.userSubsctiptions.remove(subscription);
+    }
+  },
 
   async login(username) {
     let request = new GetUserRequest();
@@ -54,12 +53,25 @@ export default Service.extend({
 
     this.currentUser = response[0];
 
-	return this.currentUser;
+    return this.currentUser;
+  },
+
+  async register(username) {
+    let request = new RegisterUserRequest();
+    request.name = username;
+
+    let communicationService = this.communicationService;
+
+    let response = await communicationService.post(Endpoints.registerUser, null, request);
+
+    this.currentUser = response[0];
+
+    return this.currentUser;
   },
 
   async getUsers() {
-	let communicationService = this.communicationService;
-	let request = new GetUserRequest();    
+    let communicationService = this.communicationService;
+    let request = new GetUserRequest();
 
     let response = await communicationService.get(Endpoints.getUser, request);
 
@@ -84,88 +96,78 @@ export default Service.extend({
   getDeedsForDate(date) {
     let formattedDate = date.toISOString().split('T')[0];
     let res = this.weekData.filter((deed) =>
-      deed.executions.some((e) => e.plannedDate.split('T')[0] == formattedDate && this.currentUser.id == e.user.id)
+      deed.executions.some(
+        (e) =>
+          e.plannedDate.split('T')[0] == formattedDate &&
+          this.currentUser.id == e.user.id
+      )
     );
     return res;
   },
 
-  async changeDeedExecution(deedId, userId, executed) {    
+  async changeDeedExecution(deedId, userId, executed) {
     if (executed) {
       let request = new CompleteDeedRequest();
       request.userId = userId;
       request.deedId = deedId;
 
-      await this.communicationService.post(
-        Endpoints.completeDeed,
-        request
-      );
+      await this.communicationService.post(Endpoints.completeDeed, request);
     } else {
       let request = new UncompleteDeedRequest();
       request.userId = userId;
       request.deedId = deedId;
 
-      await this.communicationService.post(
-        Endpoints.uncompleteDeed,
-        request
-      );
+      await this.communicationService.post(Endpoints.uncompleteDeed, request);
     }
   },
 
   async addDeed(deed) {
-	let request = new AddDeedRequest();
-	request.description = deed.description;
-	request.executions = deed.executions;
+    let request = new AddDeedRequest();
+    request.description = deed.description;
+    request.executions = deed.executions;
 
-	await this.communicationService.post(
-        Endpoints.createDeed,
-		null,
-        request
-      );
+    await this.communicationService.post(Endpoints.createDeed, null, request);
 
-	this.mainComponent.reload();
-	this.mainComponent.subwindowHide();
+    this.mainComponent.reload();
+    this.mainComponent.subwindowHide();
   },
 
-  async addExecutioner(execution) {    
-	let request = new AddExecutionerRequest();
-	request.deedId = execution.deedId;
-	request.execution = execution.execution;
-	await this.communicationService.post(
-        Endpoints.addexecutioner,
-		null,
-        request
-      );
+  async addExecutioner(execution) {
+    let request = new AddExecutionerRequest();
+    request.deedId = execution.deedId;
+    request.execution = execution.execution;
+    await this.communicationService.post(
+      Endpoints.addexecutioner,
+      null,
+      request
+    );
 
-	this.mainComponent.reload();
-	this.mainComponent.subwindowHide();
+    this.mainComponent.reload();
+    this.mainComponent.subwindowHide();
   },
 
   async deleteDeed(deedId) {
-	let request = new DeleteDeedRequest();
-	request.deedId = deedId;
-	
-	await this.communicationService.post(
-        Endpoints.deleteDeed,
-		request,
-        null
-      );
+    let request = new DeleteDeedRequest();
+    request.deedId = deedId;
 
-	this.mainComponent.reload();
-	this.mainComponent.subwindowHide();
+    await this.communicationService.post(Endpoints.deleteDeed, request, null);
+
+    this.mainComponent.reload();
+    this.mainComponent.subwindowHide();
   },
 
-  async deleteExecutioner(deedId, userId) {    
-	let request = new deleteExecutionerRequest();
-	request.deedId = deedId;
-	request.userId = userId;
+  async deleteExecutioner(deedId, userId) {
+    let request = new DeleteExecutionerRequest();
+    request.deedId = deedId;
+    request.userId = userId;
 
-	await this.communicationService.post(
-        Endpoints.deleteExecutioner,
-		request,
-		null,
-      );
+    await this.communicationService.post(
+      Endpoints.deleteExecutioner,
+      request,
+      null
+    );
 
-	this.mainComponent.reload();
-	this.mainComponent.subwindowHide();
+    this.mainComponent.reload();
+    this.mainComponent.subwindowHide();
   },
 });

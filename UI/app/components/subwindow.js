@@ -8,8 +8,8 @@ export default Component.extend({
   showSubwindow: false,
 
   actions: {
-	close: function() {
-		this.logicService.mainComponent.subwindowHide();
-	},
+    close: function () {
+      this.logicService.mainComponent.subwindowHide();
+    },
   },
 });

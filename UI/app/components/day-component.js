@@ -15,9 +15,9 @@ export default Component.extend({
   },
 
   actions: {
-	addDeed: function() {
-		let logicService = this.logicService;
-		logicService.mainComponent.subwindowShow({ date: this.date });
-	 },
+    addDeed: function () {
+      let logicService = this.logicService;
+      logicService.mainComponent.subwindowShow({ date: this.date });
+    },
   },
 });

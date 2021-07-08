@@ -2,7 +2,7 @@
 
 namespace EfDataAccess
 {
-    public class User : IEntityWithId
+    internal class User : IEntityWithId
     {
         public int Id { get; set; }
 

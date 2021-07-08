@@ -1,18 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace EfDataAccess
 {
-    public class PlannerContext : DbContext
+    internal class PlannerContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        internal DbSet<User> Users { get; set; }
 
-        public DbSet<Deed> Deeds { get; set; }
+        internal DbSet<Deed> Deeds { get; set; }
 
         public DbSet<Execution> Executions { get; set; }
 
+        private readonly IConfiguration _configuration;
+
+        public PlannerContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=ksu-learning.database.windows.net; Database=Planner; User=planner; Password=b3thz35fd#; MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(_configuration["SQLConnectionString"]);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -4,7 +4,7 @@ module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'planner',
     environment,
-    rootURL: '/',
+    rootURL: '/ui/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {

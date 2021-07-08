@@ -4,7 +4,7 @@ using Planner.OutDTO;
 
 namespace Planner.Mapper
 {
-    public static class MapperFactory
+    internal static class MapperFactory
     {
         private static readonly Lazy<AutoMapper.Mapper> _mapper =
             new Lazy<AutoMapper.Mapper>(() =>

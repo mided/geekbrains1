@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Planner
 {
-    public static class ErrorHandlerExtension
+    internal static class ErrorHandlerExtension
     {
         public static IApplicationBuilder UseDomainExceptions(this IApplicationBuilder builder)
         {

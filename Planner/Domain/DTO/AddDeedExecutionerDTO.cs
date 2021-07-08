@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Domain.DTO;
 
 namespace Domain.DTO
 {

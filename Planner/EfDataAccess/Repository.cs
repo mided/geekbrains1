@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Domain.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace EfDataAccess
 {
@@ -12,9 +13,9 @@ namespace EfDataAccess
 
         private readonly Mapper _mapper;
 
-        public Repository()
+        public Repository(IConfiguration configuration)
         {
-            _context = new PlannerContext();
+            _context = new PlannerContext(configuration);
             _mapper = MapperFactory.Mapper;
         }
 

@@ -3,7 +3,7 @@ using Domain.Interfaces;
 
 namespace EfDataAccess
 {
-    public class Deed : IEntityWithId
+    internal class Deed : IEntityWithId
     {
         public int Id { get; set; }
 

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.DTO;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Interfaces;
+using Domain.DTO;
 
 namespace BusinessLogic
 {

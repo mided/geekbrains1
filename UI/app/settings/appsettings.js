@@ -1,4 +1,4 @@
 export default {
-  api: 'https://localhost:44305',
+  api: 'https://geekplanner.azurewebsites.net',
   consoleLog: false,
 };
